@@ -11,7 +11,7 @@ strategy_name = 'The name the team gives to this strategy'
 strategy_description = 'How does this strategy decide?'
     
 def move(my_history, their_history, my_score, their_score):
-    '''Make my move based on the history with this player.
+    '''Make my move based on the history with this player before continuing to betray them.
     
     history: a string with one letter (c or b) per round that has been played with this opponent.
     their_history: a string of the same length as history, possibly empty. 
@@ -31,7 +31,7 @@ def move(my_history, their_history, my_score, their_score):
         recent_round_me = my_history[-1]
                     
         # Look at rounds before that one
-        for round in range(len(my_history)-1):
+        for round in range(len(my_history)-4):
             prior_round_them = their_history[round]
             prior_round_me = my_history[round]
             # If one matches
@@ -43,7 +43,7 @@ def move(my_history, their_history, my_score, their_score):
             return 'b' # Betray if they were severely punished last time
         else:
             return 'c' # Otherwise collude.
-    
+            
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
     from this module. Prints error if return value != result.
